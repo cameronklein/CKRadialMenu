@@ -10,6 +10,10 @@
 		7E661F931A34E77B00DF92EE /* CKRadialMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E661F921A34E77B00DF92EE /* CKRadialMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E661F991A34E77B00DF92EE /* CKRadialMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */; };
 		7E661FA01A34E77B00DF92EE /* CKRadialMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E661F9F1A34E77B00DF92EE /* CKRadialMenuTests.m */; };
+		7E661FAB1A34E7E300DF92EE /* CKRadialView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E661FA91A34E7E300DF92EE /* CKRadialView.h */; };
+		7E661FAC1A34E7E300DF92EE /* CKRadialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E661FAA1A34E7E300DF92EE /* CKRadialView.m */; };
+		7E661FAE1A34E89800DF92EE /* CKRadialMenuDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E661FAD1A34E89800DF92EE /* CKRadialMenuDelegate.h */; };
+		7E661FB01A34E8AB00DF92EE /* CKRadialMenuDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E661FAF1A34E8AB00DF92EE /* CKRadialMenuDataSource.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		7E661F981A34E77B00DF92EE /* CKRadialMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CKRadialMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E661F9E1A34E77B00DF92EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E661F9F1A34E77B00DF92EE /* CKRadialMenuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKRadialMenuTests.m; sourceTree = "<group>"; };
+		7E661FA91A34E7E300DF92EE /* CKRadialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRadialView.h; sourceTree = "<group>"; };
+		7E661FAA1A34E7E300DF92EE /* CKRadialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRadialView.m; sourceTree = "<group>"; };
+		7E661FAD1A34E89800DF92EE /* CKRadialMenuDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRadialMenuDelegate.h; sourceTree = "<group>"; };
+		7E661FAF1A34E8AB00DF92EE /* CKRadialMenuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRadialMenuDataSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,10 @@
 			isa = PBXGroup;
 			children = (
 				7E661F921A34E77B00DF92EE /* CKRadialMenu.h */,
+				7E661FA91A34E7E300DF92EE /* CKRadialView.h */,
+				7E661FAA1A34E7E300DF92EE /* CKRadialView.m */,
+				7E661FAD1A34E89800DF92EE /* CKRadialMenuDelegate.h */,
+				7E661FAF1A34E8AB00DF92EE /* CKRadialMenuDataSource.h */,
 				7E661F901A34E77B00DF92EE /* Supporting Files */,
 			);
 			path = CKRadialMenu;
@@ -109,6 +121,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E661FAE1A34E89800DF92EE /* CKRadialMenuDelegate.h in Headers */,
+				7E661FB01A34E8AB00DF92EE /* CKRadialMenuDataSource.h in Headers */,
+				7E661FAB1A34E7E300DF92EE /* CKRadialView.h in Headers */,
 				7E661F931A34E77B00DF92EE /* CKRadialMenu.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E661FAC1A34E7E300DF92EE /* CKRadialView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
