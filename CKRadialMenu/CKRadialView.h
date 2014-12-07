@@ -10,16 +10,19 @@
 #import "CKRadialMenuDataSource.h"
 #import "CKRadialMenuDelegate.h"
 
-@interface CKRadialView : UIView
+@interface CKRadialView : UIView <UITableViewDelegate>
 
 @property (nonatomic, strong) NSObject<CKRadialMenuDelegate> *delegate;
 @property (nonatomic, strong) NSObject<CKRadialMenuDataSource> *dataSource;
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSMutableArray *popoutViews;
 
+
 @property CGFloat popoutViewSize;
 @property CGFloat distanceFromCenter;
 @property CGFloat distanceBetweenPopouts;
 @property CGFloat startAngle;
+
+@property BOOL menuIsExpanded;
 
 @end

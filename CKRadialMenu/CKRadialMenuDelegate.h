@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class CKRadialView;
 
 @protocol CKRadialMenuDelegate <NSObject>
+
+-(void)radialMenu:(CKRadialView *)radialMenu didSelectPopoutWithIndentifier: (NSString *) identifier;
 
 @end
