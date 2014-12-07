@@ -15,5 +15,4 @@ FOUNDATION_EXPORT double CKRadialMenuVersionNumber;
 FOUNDATION_EXPORT const unsigned char CKRadialMenuVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CKRadialMenu/PublicHeader.h>
-
-
+#import "CKRadialView.h"

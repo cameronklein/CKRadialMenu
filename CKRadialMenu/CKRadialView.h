@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CKRadialMenuDataSource.h"
 #import "CKRadialMenuDelegate.h"
 
-@interface CKRadialView : UIView <UITableViewDelegate>
+@interface CKRadialView : UIView
+
+- (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier;
 
 @property (nonatomic, strong) NSObject<CKRadialMenuDelegate> *delegate;
-@property (nonatomic, strong) NSObject<CKRadialMenuDataSource> *dataSource;
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSMutableArray *popoutViews;
 
@@ -26,3 +26,5 @@
 @property BOOL menuIsExpanded;
 
 @end
+
+
