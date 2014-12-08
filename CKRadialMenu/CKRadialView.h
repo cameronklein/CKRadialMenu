@@ -12,6 +12,8 @@
 @interface CKRadialView : UIView
 
 - (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier;
+- (void) expand;
+- (void) retract;
 
 @property (nonatomic, strong) NSObject<CKRadialMenuDelegate> *delegate;
 @property (nonatomic, strong) UIView *centerView;

@@ -41,7 +41,7 @@
     self.menuIsExpanded = false;
     self.centerView = [self makeDefaultCenterView];
     self.centerView.frame = self.bounds;
-    self.distanceBetweenPopouts = 10;
+    self.distanceBetweenPopouts = 45;
     self.distanceFromCenter = 50;
     [self addSubview:self.centerView];
   }
@@ -66,36 +66,45 @@
 - (void) didTapCenterView: (UITapGestureRecognizer *) sender {
   NSLog(@"%d", self.menuIsExpanded);
   if (self.menuIsExpanded) {
-    for (UIView *subView in self.popoutViews) {
-      [UIView animateWithDuration:0.4
-                            delay:0.0
-           usingSpringWithDamping:0.7
-            initialSpringVelocity:0.4
-                          options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                            subView.transform = CGAffineTransformIdentity;
-                          } completion:^(BOOL finished) {
-                            
-                          }];
-    }
+    [self retract];
   } else {
-    NSInteger i = 0;
-    for (UIView *subView in self.popoutViews) {
-      [self addSubview:subView];
-      [self sendSubviewToBack:subView];
-      subView.center = CGPointMake(self.bounds.origin.x + self.bounds.size.width/2,self.bounds.origin.y + self.bounds.size.height/2);
-      [UIView animateWithDuration:0.4
-                            delay:0.0
-           usingSpringWithDamping:0.7
-            initialSpringVelocity:0.4
-                          options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                            subView.transform = [self getTransformForPopupViewAtIndex:i];
-                          } completion:^(BOOL finished) {
-                          
-                          }];
-      i++;
-    }
+    [self expand];
   }
-  self.menuIsExpanded = !self.menuIsExpanded;
+}
+
+- (void) expand {
+  NSInteger i = 0;
+  for (UIView *subView in self.popoutViews) {
+    subView.alpha = 0;
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.4
+                        options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                          subView.alpha = 1;
+                          subView.transform = [self getTransformForPopupViewAtIndex:i];
+                        } completion:^(BOOL finished) {
+                          
+                        }];
+    i++;
+  }
+  self.menuIsExpanded = true;
+}
+
+- (void) retract {
+  for (UIView *subView in self.popoutViews) {
+    
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.4
+                        options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                          subView.transform = CGAffineTransformIdentity;
+                        } completion:^(BOOL finished) {
+                          
+                        }];
+  }
+  self.menuIsExpanded = false;
 }
 
 - (void) didTapPopoutView: (UITapGestureRecognizer *) sender {
@@ -122,7 +131,9 @@
   [tap addTarget:self action:@selector(didTapPopoutView:)];
   [popoutView addGestureRecognizer:tap];
   
-  //[self addSubview:popoutView];
+  [self addSubview:popoutView];
+  [self sendSubviewToBack:popoutView];
+  popoutView.center = CGPointMake(self.bounds.origin.x + self.bounds.size.width/2,self.bounds.origin.y + self.bounds.size.height/2);
 }
 
 #pragma mark Make Default Views
@@ -141,7 +152,7 @@
   NSLog(@"Making Default Popup View");
   UIView *view = [UIView new];
   view.frame = CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height / 2);
-  view.layer.cornerRadius = self.frame.size.width/2;
+  view.layer.cornerRadius = view.frame.size.width/2;
   view.backgroundColor = [UIColor blueColor];
   return view;
 }
@@ -149,11 +160,23 @@
 #pragma mark Helper Methods
 
 - (CGAffineTransform) getTransformForPopupViewAtIndex: (NSInteger) index {
-  
-  CGFloat deltaX = self.distanceFromCenter * cos(self.startAngle + (self.distanceBetweenPopouts * index));
-  CGFloat deltaY = self.distanceFromCenter * sin(self.startAngle + (self.distanceBetweenPopouts * index));
-  
+  NSLog(@"%f",self.distanceBetweenPopouts);
+  NSLog(@"%f",self.distanceBetweenPopouts);
+  CGFloat deltaY = -self.distanceFromCenter * cos(self.startAngle + (self.distanceBetweenPopouts * index)/ 180.0 * M_PI);
+  CGFloat deltaX = self.distanceFromCenter * sin(self.startAngle + (self.distanceBetweenPopouts * index)/ 180.0 * M_PI);
+  NSLog(@"%f %f", deltaX, deltaY);
   return CGAffineTransformMakeTranslation(deltaX, deltaY);
+  
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+  
+  for (UIView *subView in self.popoutViews) {
+    if (CGRectContainsPoint(subView.frame, point)) {
+      return true;
+    }
+  }
+  return false;
   
 }
 
