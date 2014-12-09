@@ -12,6 +12,7 @@ Features
 
 Preview
 -------
+![Preview](https://github.com/cameronklein/CKRadialMenu/blob/master/CKRadialMenu/CKRadialMenu.gif)
 
 Setup
 ------
