@@ -44,6 +44,7 @@ Development Mode
 -----------
 
 ![Development Mode](https://github.com/cameronklein/CKRadialMenu/blob/master/CKRadialMenu/MKRadialMenuDevMode.gif)
+
 By activating development mode, you can play with the positioning of popout views inside your own app. Invoke development mode **in viewDidAppear or later.**
 
     [radialMenu enableDevelopmentMode];
