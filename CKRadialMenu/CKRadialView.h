@@ -14,16 +14,18 @@
 - (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier;
 - (void) expand;
 - (void) retract;
+- (void) enablePositioningMode;
 
 @property (nonatomic, strong) NSObject<CKRadialMenuDelegate> *delegate;
+
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSMutableArray *popoutViews;
-
 
 @property CGFloat popoutViewSize;
 @property CGFloat distanceFromCenter;
 @property CGFloat distanceBetweenPopouts;
 @property CGFloat startAngle;
+@property NSTimeInterval stagger;
 
 @property BOOL menuIsExpanded;
 
