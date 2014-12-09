@@ -12,11 +12,12 @@
 @interface CKRadialView : UIView
 
 - (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier;
+- (UIView *) getPopoutViewWithIndentifier: (NSString *) identifier;
 - (void) expand;
 - (void) retract;
-- (void) enablePositioningMode;
+- (void) enableDevelopmentMode;
 
-@property (nonatomic, strong) NSObject<CKRadialMenuDelegate> *delegate;
+@property (nonatomic, weak) NSObject<CKRadialMenuDelegate> *delegate;
 
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSMutableArray *popoutViews;
@@ -25,6 +26,7 @@
 @property CGFloat distanceFromCenter;
 @property CGFloat distanceBetweenPopouts;
 @property CGFloat startAngle;
+@property CGFloat animationDuration;
 @property NSTimeInterval stagger;
 
 @property BOOL menuIsExpanded;

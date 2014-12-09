@@ -29,14 +29,26 @@
 -(void)viewDidAppear:(BOOL)animated {
   NSLog(@"View did appear called");
   [super viewDidAppear:animated];
-  CKRadialView *radialView = [[CKRadialView alloc] initWithFrame:CGRectMake(100, 300, 40, 40)];
+  CKRadialView *radialView = [[CKRadialView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 -  25, 400, 50, 50)];
   radialView.delegate = self;
-  //radialView.stagger = 0.5;
+  radialView.centerView.backgroundColor = [UIColor grayColor];
   [radialView addPopoutView:nil withIndentifier:@"ONE"];
+  UIView *viewOne = [radialView getPopoutViewWithIndentifier:@"ONE"];
+  UILabel *labelOne = [[UILabel alloc] init];
+  viewOne.backgroundColor = [UIColor blueColor];
+  [viewOne addSubview:labelOne];
   [radialView addPopoutView:nil withIndentifier:@"TWO"];
+  UIView *viewTwo = [radialView getPopoutViewWithIndentifier:@"TWO"];
+  UILabel *labelTwo = [[UILabel alloc] init];
+  viewTwo.backgroundColor = [UIColor redColor];
+  [viewTwo addSubview:labelTwo];
   [radialView addPopoutView:nil withIndentifier:@"THREE"];
+  UIView *viewThree = [radialView getPopoutViewWithIndentifier:@"THREE"];
+  UILabel *labelThree = [[UILabel alloc] init];
+  viewThree.backgroundColor = [UIColor purpleColor];
+  [viewThree addSubview:labelThree];
   [self.view addSubview:radialView];
-  [radialView enablePositioningMode];
+  [radialView enableDevelopmentMode];
   
 }
 

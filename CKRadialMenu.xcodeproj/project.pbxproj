@@ -23,6 +23,8 @@
 		7E6871031A36E2CF00A6513D /* TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6871021A36E2CF00A6513D /* TestTests.m */; };
 		7E68710A1A36E34D00A6513D /* CKRadialMenu.framework in Resources */ = {isa = PBXBuildFile; fileRef = 7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */; };
 		7E68710B1A36E35B00A6513D /* CKRadialMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */; };
+		7E9337281A37AFE400A20CFE /* CKRadialMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */; };
+		7E9337291A37AFE400A20CFE /* CKRadialMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +42,28 @@
 			remoteGlobalIDString = 7E6870E01A36E2CF00A6513D;
 			remoteInfo = Test;
 		};
+		7E93372A1A37AFE400A20CFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E661F841A34E77B00DF92EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E661F8C1A34E77B00DF92EE;
+			remoteInfo = CKRadialMenu;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7E93372C1A37AFE400A20CFE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7E9337291A37AFE400A20CFE /* CKRadialMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7E661F8D1A34E77B00DF92EE /* CKRadialMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CKRadialMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9337281A37AFE400A20CFE /* CKRadialMenu.framework in Frameworks */,
 				7E68710B1A36E35B00A6513D /* CKRadialMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,10 +286,12 @@
 				7E6870DD1A36E2CF00A6513D /* Sources */,
 				7E6870DE1A36E2CF00A6513D /* Frameworks */,
 				7E6870DF1A36E2CF00A6513D /* Resources */,
+				7E93372C1A37AFE400A20CFE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7E93372B1A37AFE400A20CFE /* PBXTargetDependency */,
 			);
 			name = Test;
 			productName = Test;
@@ -419,6 +445,11 @@
 			target = 7E6870E01A36E2CF00A6513D /* Test */;
 			targetProxy = 7E6870FD1A36E2CF00A6513D /* PBXContainerItemProxy */;
 		};
+		7E93372B1A37AFE400A20CFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E661F8C1A34E77B00DF92EE /* CKRadialMenu */;
+			targetProxy = 7E93372A1A37AFE400A20CFE /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -476,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -515,7 +546,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -534,6 +565,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CKRadialMenu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -549,6 +581,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CKRadialMenu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -680,6 +713,7 @@
 				7E6871051A36E2CF00A6513D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E6871091A36E2CF00A6513D /* Build configuration list for PBXNativeTarget "TestTests" */ = {
 			isa = XCConfigurationList;
@@ -688,6 +722,7 @@
 				7E6871071A36E2CF00A6513D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *distanceBetweenLabel;
 @property (nonatomic, strong) UILabel *angleLabel;
 @property (nonatomic, strong) UILabel *staggerLabel;
+@property (nonatomic, strong) UILabel *animationLabel;
 
 @end
 
@@ -43,9 +44,11 @@
     self.menuIsExpanded = false;
     self.centerView = [self makeDefaultCenterView];
     self.centerView.frame = self.bounds;
-    self.distanceBetweenPopouts = 45;
+    self.startAngle = -55;
+    self.distanceBetweenPopouts = 55;
     self.distanceFromCenter = 55;
     self.stagger = 0.06;
+    self.animationDuration = 0.4;
     [self addSubview:self.centerView];
   }
   return self;
@@ -74,40 +77,49 @@
 }
 
 - (void) expand {
-  NSInteger i = 0;
-  for (UIView *subView in self.popoutViews) {
-    subView.alpha = 0;
-    [UIView animateWithDuration:0.4
-                          delay:self.stagger*i
-         usingSpringWithDamping:0.7
-          initialSpringVelocity:0.4
-                        options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                          subView.alpha = 1;
-                          subView.transform = [self getTransformForPopupViewAtIndex:i];
-                        } completion:^(BOOL finished) {
-                          
-                        }];
-    i++;
+  if (![self.delegate respondsToSelector:@selector(radialMenuShouldExpand:)] || [self.delegate radialMenuShouldExpand:self]) {
+    NSInteger i = 0;
+    for (UIView *subView in self.popoutViews) {
+      subView.alpha = 0;
+      [UIView animateWithDuration:self.animationDuration
+                            delay:self.stagger*i
+           usingSpringWithDamping:0.7
+            initialSpringVelocity:0.4
+                          options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                            subView.alpha = 1;
+                            subView.transform = [self getTransformForPopupViewAtIndex:i];
+                          } completion:^(BOOL finished) {
+                            if ([self.delegate respondsToSelector:@selector(radialMenuDidExpand:)]) {
+                              [self.delegate radialMenuDidExpand:self];
+                            }
+                          }];
+      i++;
+    }
+    self.menuIsExpanded = true;
   }
-  self.menuIsExpanded = true;
 }
 
 - (void) retract {
-  NSInteger i = 0;
-  for (UIView *subView in self.popoutViews) {
-    
-    [UIView animateWithDuration:0.4
-                          delay:self.stagger*i
-         usingSpringWithDamping:0.7
-          initialSpringVelocity:0.4
-                        options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                          subView.transform = CGAffineTransformIdentity;
-                        } completion:^(BOOL finished) {
-                          
-                        }];
-    i++;
+  if (![self.delegate respondsToSelector:@selector(radialMenuShouldRetract:)] || [self.delegate radialMenuShouldRetract:self]) {
+    NSInteger i = 0;
+    for (UIView *subView in self.popoutViews) {
+      
+      [UIView animateWithDuration:self.animationDuration
+                            delay:self.stagger*i
+           usingSpringWithDamping:0.7
+            initialSpringVelocity:0.4
+                          options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                            subView.transform = CGAffineTransformIdentity;
+                            subView.alpha = 0;
+                          } completion:^(BOOL finished) {
+                            if ([self.delegate respondsToSelector:@selector(radialMenuDidRetract:)]) {
+                              [self.delegate radialMenuDidRetract:self];
+                            }
+                          }];
+      i++;
+    }
+    self.menuIsExpanded = false;
   }
-  self.menuIsExpanded = false;
 }
 
 - (void) didTapPopoutView: (UITapGestureRecognizer *) sender {
@@ -116,7 +128,7 @@
   [self.delegate radialMenu:self didSelectPopoutWithIndentifier:key];
 }
 
-#pragma mark Add Popout View
+#pragma mark Popout Views
 
 - (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier {
   if (!popoutView){
@@ -127,10 +139,16 @@
   UIGestureRecognizer *tap = [UITapGestureRecognizer new];
   [tap addTarget:self action:@selector(didTapPopoutView:)];
   [popoutView addGestureRecognizer:tap];
-  
+  popoutView.alpha = 0;
   [self addSubview:popoutView];
   [self sendSubviewToBack:popoutView];
   popoutView.center = CGPointMake(self.bounds.origin.x + self.bounds.size.width/2,self.bounds.origin.y + self.bounds.size.height/2);
+}
+
+-(UIView *)getPopoutViewWithIndentifier:(NSString *)identifier {
+  
+  return [self.poputIDs objectForKey:identifier];
+  
 }
 
 #pragma mark Make Default Views
@@ -181,34 +199,33 @@
   return false;
 }
 
-- (void) enablePositioningMode {
+- (void) enableDevelopmentMode {
   
   UIView *positionView = [UIView new];
   CGRect screenRect = [UIScreen mainScreen].bounds;
-  positionView.frame = CGRectMake(screenRect.origin.x, screenRect.origin.y, screenRect.size.width,100);
+  positionView.frame = CGRectMake(screenRect.origin.x, screenRect.origin.y + 100, screenRect.size.width,110);
   [[[[UIApplication sharedApplication] delegate] window] addSubview:positionView];
   [[[[UIApplication sharedApplication] delegate] window] bringSubviewToFront:positionView];
-  positionView.backgroundColor = [UIColor greenColor];
   
   self.distanceLabel = [UILabel new];
   self.distanceLabel.frame = CGRectMake(10, 20, 300, 20);
   [positionView addSubview:self.distanceLabel];
   self.distanceLabel.text = [NSString stringWithFormat:@"Distance From Center: %.02f", self.distanceFromCenter];
-  self.distanceLabel.font = [UIFont fontWithName:@"Avenir" size:14];
+  self.distanceLabel.font = [UIFont fontWithName:@"Avenir" size:16];
   
   self.angleLabel = [UILabel new];
   self.angleLabel.frame = CGRectMake(10, 40, 300, 20);
   [positionView addSubview:self.angleLabel];
   self.angleLabel.text = [NSString stringWithFormat:@"Start Angle: %.02f", self.startAngle];
-  self.angleLabel.font = [UIFont fontWithName:@"Avenir" size:14];
+  self.angleLabel.font = [UIFont fontWithName:@"Avenir" size:16];
   
   self.distanceBetweenLabel = [UILabel new];
   self.distanceBetweenLabel.frame = CGRectMake(10, 60, 200, 20);
   [positionView addSubview:self.distanceBetweenLabel];
   self.distanceBetweenLabel.text = [NSString stringWithFormat:@"Distance Between: %.02f", self.distanceBetweenPopouts];
-  self.distanceBetweenLabel.font = [UIFont fontWithName:@"Avenir" size:14];
+  self.distanceBetweenLabel.font = [UIFont fontWithName:@"Avenir" size:16];
   UISlider *distanceSlider = [UISlider new];
-  distanceSlider.frame = CGRectMake(300, 60, self.positionView.bounds.size.width - 100, 20);
+  distanceSlider.frame = CGRectMake(200, 60, screenRect.size.width - 225, 20);
   [positionView addSubview:distanceSlider];
   distanceSlider.maximumValue = 180;
   distanceSlider.minimumValue = 0;
@@ -216,18 +233,17 @@
   [distanceSlider addTarget:self action:@selector(distanceSliderChanged:) forControlEvents:UIControlEventValueChanged];
   
   self.staggerLabel = [UILabel new];
-  self.staggerLabel.frame = CGRectMake(10, 80, 200, 20);
+  self.staggerLabel.frame = CGRectMake(10, 100, 200, 20);
   [positionView addSubview:self.staggerLabel];
   self.staggerLabel.text = [NSString stringWithFormat:@"Stagger in Seconds: %.02f", self.stagger];
-  self.staggerLabel.font = [UIFont fontWithName:@"Avenir" size:14];
+  self.staggerLabel.font = [UIFont fontWithName:@"Avenir" size:16];
   UISlider *staggerSlider = [UISlider new];
-  staggerSlider.frame = CGRectMake(300, 80, self.positionView.bounds.size.width - 100, 20);
+  staggerSlider.frame = CGRectMake(200, 100, screenRect.size.width - 225, 20);
   [positionView addSubview:staggerSlider];
   staggerSlider.maximumValue = 1;
   staggerSlider.minimumValue = 0;
-  staggerSlider.value = self.distanceBetweenPopouts;
+  staggerSlider.value = self.stagger;
   [staggerSlider addTarget:self action:@selector(staggerSliderChanged:) forControlEvents:UIControlEventValueChanged];
-  
   
   for (UIView *subView in self.popoutViews) {
     [subView removeGestureRecognizer:[subView gestureRecognizers][0]];
@@ -240,6 +256,7 @@
 
 -(void) didPanPopout:(UIPanGestureRecognizer *)sender {
   UIView *view = sender.view;
+  NSInteger i = [self.popoutViews indexOfObject:view];
   CGPoint point = [sender locationInView:self];
   CGFloat centerX = self.bounds.origin.x + self.bounds.size.width/2;
   CGFloat centerY = self.bounds.origin.y + self.bounds.size.height/2;
@@ -253,11 +270,11 @@
     
     // Assign Results
     self.distanceFromCenter = distanceFromCenter;
-    self.startAngle = angle;
+    self.startAngle = angle - self.distanceBetweenPopouts * i;
     
     // Change Labels
     self.distanceLabel.text = [NSString stringWithFormat:@"Distance From Center: %.02f", self.distanceFromCenter];
-    self.angleLabel.text = [NSString stringWithFormat:@"Start Angle: %.02f", angle];
+    self.angleLabel.text = [NSString stringWithFormat:@"Start Angle: %.02f", self.startAngle];
     
     // Change Position of Views
     view.center = point;
@@ -298,5 +315,11 @@
   self.stagger = sender.value;
   self.staggerLabel.text = [NSString stringWithFormat:@"Stagger In Seconds: %.02f", self.stagger];
 }
+
+- (void)durationSliderChanged:(UISlider *)sender {
+  self.animationDuration = sender.value;
+  self.animationLabel.text = [NSString stringWithFormat:@"Duration In Seconds: %.02f", self.animationDuration];
+}
+
 
 @end

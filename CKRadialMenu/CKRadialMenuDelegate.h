@@ -11,6 +11,14 @@
 
 @protocol CKRadialMenuDelegate <NSObject>
 
+@optional
+
 -(void)radialMenu:(CKRadialView *)radialMenu didSelectPopoutWithIndentifier: (NSString *) identifier;
+
+-(BOOL)radialMenuShouldExpand:(CKRadialView *)radialMenu;
+-(void)radialMenuDidExpand:(CKRadialView *)radialMenu;
+
+-(BOOL)radialMenuShouldRetract:(CKRadialView *)radialMenu;
+-(void)radialMenuDidRetract:(CKRadialView *)radialMenu;
 
 @end
