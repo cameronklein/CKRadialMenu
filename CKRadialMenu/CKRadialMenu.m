@@ -29,10 +29,11 @@
   return self;
 }
 
--(instancetype)init{
-  NSLog(@"InitWithCoderCalled");
+-(instancetype)init {
+  self = [self initWithFrame:CGRectZero];
   return self;
 }
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -66,6 +67,11 @@
   [self.centerView addGestureRecognizer:tap];
 }
 
+-(void)setFrame:(CGRect)frame{
+  [super setFrame:frame];
+  self.centerView.frame = self.bounds;
+  
+}
 #pragma mark Gesture Recognizers
 
 - (void) didTapCenterView: (UITapGestureRecognizer *) sender {
@@ -203,7 +209,7 @@
   
   UIView *positionView = [UIView new];
   CGRect screenRect = [UIScreen mainScreen].bounds;
-  positionView.frame = CGRectMake(screenRect.origin.x, screenRect.origin.y + 100, screenRect.size.width,110);
+  positionView.frame = CGRectMake(screenRect.origin.x, screenRect.origin.y, screenRect.size.width,110);
   [[[[UIApplication sharedApplication] delegate] window] addSubview:positionView];
   [[[[UIApplication sharedApplication] delegate] window] bringSubviewToFront:positionView];
   
