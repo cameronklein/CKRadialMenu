@@ -25,7 +25,7 @@
 #pragma mark Initalizer
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
-  NSLog(@"InitWithCoderCalled");
+  self = [self initWithFrame:CGRectZero];
   return self;
 }
 
@@ -37,7 +37,6 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-  NSLog(@"InitWithFrameCalled");
   self = [super initWithFrame:frame];
   if (self) {
     self.popoutViews = [NSMutableArray new];
@@ -45,9 +44,9 @@
     self.menuIsExpanded = false;
     self.centerView = [self makeDefaultCenterView];
     self.centerView.frame = self.bounds;
-    self.startAngle = -55;
-    self.distanceBetweenPopouts = 55;
-    self.distanceFromCenter = 55;
+    self.startAngle = -75;
+    self.distanceBetweenPopouts = 50;
+    self.distanceFromCenter = 61;
     self.stagger = 0.06;
     self.animationDuration = 0.4;
     [self addSubview:self.centerView];
@@ -186,7 +185,6 @@
 
 - (CGAffineTransform) getTransformForPopupViewAtIndex: (NSInteger) index {
   CGFloat newAngle = self.startAngle + (self.distanceBetweenPopouts * index);
-  NSLog(@"%f", newAngle);
   CGFloat deltaY = -self.distanceFromCenter * cos(newAngle/ 180.0 * M_PI);
   CGFloat deltaX = self.distanceFromCenter * sin(newAngle/ 180.0 * M_PI);
   return CGAffineTransformMakeTranslation(deltaX, deltaY);
