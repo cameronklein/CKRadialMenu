@@ -14,6 +14,10 @@ Preview
 -------
 ![Preview](https://github.com/cameronklein/CKRadialMenu/blob/master/CKRadialMenu/CKRadialMenu.gif)
 
+Installation
+-------
+Simply drag *CKRadialMenu.h* and *CKRadialMenu.m* into your project. Cocoa pod support coming soon.
+
 Setup
 ------
 This sample setup initalizes the main view and two popout views -- one default and one custom.
