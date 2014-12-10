@@ -29,7 +29,7 @@
 -(void)viewDidAppear:(BOOL)animated {
   NSLog(@"View did appear called");
   [super viewDidAppear:animated];
-  CKRadialView *radialView = [[CKRadialView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 -  25, 400, 50, 50)];
+  CKRadialMenu *radialView = [[CKRadialMenu alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 -  25, 400, 50, 50)];
   radialView.delegate = self;
   radialView.centerView.backgroundColor = [UIColor grayColor];
   [radialView addPopoutView:nil withIndentifier:@"ONE"];
@@ -56,7 +56,7 @@
   [super didReceiveMemoryWarning];
 }
 
--(void)radialMenu:(CKRadialView *)radialMenu didSelectPopoutWithIndentifier:(NSString *)identifier{
+-(void)radialMenu:(CKRadialMenu *)radialMenu didSelectPopoutWithIndentifier:(NSString *)identifier{
   NSLog(@"DELEGATE CALLED");
   
 }

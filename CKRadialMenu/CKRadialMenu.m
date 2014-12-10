@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Cameron Klein. All rights reserved.
 //
 
-#import "CKRadialView.h"
+#import "CKRadialMenu.h"
 
-@interface CKRadialView()
+@interface CKRadialMenu()
 
 @property (nonatomic, strong) NSMutableDictionary *poputIDs;
 @property (nonatomic, strong) UIView *positionView;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation CKRadialView
+@implementation CKRadialMenu
 
 #pragma mark Initalizer
 

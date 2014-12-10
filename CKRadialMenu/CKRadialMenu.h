@@ -1,5 +1,5 @@
 //
-//  CKRadialMenu.h
+//  CKRadialView.h
 //  CKRadialMenu
 //
 //  Created by Cameron Klein on 12/7/14.
@@ -7,14 +7,43 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CKRadialMenu;
+@protocol CKRadialMenuDelegate <NSObject>
 
-//! Project version number for CKRadialMenu.
-FOUNDATION_EXPORT double CKRadialMenuVersionNumber;
+@optional
 
-//! Project version string for CKRadialMenu.
-FOUNDATION_EXPORT const unsigned char CKRadialMenuVersionString[];
+-(void)radialMenu:(CKRadialMenu *)radialMenu didSelectPopoutWithIndentifier: (NSString *) identifier;
 
-// In this header, you should import all the public headers of your framework using statements like #import <CKRadialMenu/PublicHeader.h>
-#import "CKRadialView.h"
+-(BOOL)radialMenuShouldExpand:(CKRadialMenu *)radialMenu;
+-(void)radialMenuDidExpand:(CKRadialMenu *)radialMenu;
 
-//test
+-(BOOL)radialMenuShouldRetract:(CKRadialMenu *)radialMenu;
+-(void)radialMenuDidRetract:(CKRadialMenu *)radialMenu;
+
+@end
+
+@interface CKRadialMenu : UIView
+
+- (void) addPopoutView: (UIView *) popoutView withIndentifier: (NSString *) identifier;
+- (UIView *) getPopoutViewWithIndentifier: (NSString *) identifier;
+- (void) expand;
+- (void) retract;
+- (void) enableDevelopmentMode;
+
+@property (nonatomic, weak) NSObject<CKRadialMenuDelegate> *delegate;
+
+@property (nonatomic, strong) UIView *centerView;
+@property (nonatomic, strong) NSMutableArray *popoutViews;
+
+@property CGFloat popoutViewSize;
+@property CGFloat distanceFromCenter;
+@property CGFloat distanceBetweenPopouts;
+@property CGFloat startAngle;
+@property CGFloat animationDuration;
+@property NSTimeInterval stagger;
+
+@property BOOL menuIsExpanded;
+
+@end
+
+
