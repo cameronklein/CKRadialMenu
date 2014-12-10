@@ -33,6 +33,42 @@ This sample setup initalizes the main view and two popout views -- one default a
     // Or bring your own popout views!
     UIImageView *chat = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chat"]];
     [radialMenu addPopoutView: foo withIdentifier:@"CHAT"];
+    
+Use
+----
+By default, the radial menu expands and retracts with a tap on the center view. You can override this by using radialMenuShouldExpand: or radialMenuShouldRetract: methods of the delegate.
+
+If you want to expand or contract at some other time, simply call:
+
+    [radialMenu expand];
+    [radialMenu retract];
+    
+To get a popout view after you've set it, call:
+
+    [radialView getPopoutViewWithIdentifier:@"Foo"];
+    
+This is useful to add/change labels to your view to react to changes in state.
+
+CKRadialMenu comes with a few properties to change animations. See development mode below for interactive demonstration inside your app
+
+**Properties:**
+
+    // Distance from center of centerView and center of popoutViews
+    CGFloat distanceFromCenter
+
+    // Distance between popout views, in degrees
+    CGFloat distanceBetweenPopouts;
+    
+    // Angle at which the first popout view exists, in degrees
+    // 0 = straight up
+    CGFloat startAngle;
+    
+    // Animation time in seconds
+    CGFloat animationDuration;
+    
+    // Time in seconds to stagger the animation of popout views
+    // At zero, all popout views will popout at once
+    NSTimeInterval stagger;
 
 CKRadialMenuDelegate
 ------
