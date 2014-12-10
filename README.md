@@ -1,7 +1,7 @@
 CKRadialMenu
 ============
 
-An iOS framework for customizable radial popout menus
+An iOS framework for customizable radial popout menus.
 
 Features
 -------
@@ -42,6 +42,9 @@ CKRadialMenuDelegate
 
 Development Mode
 -----------
+
+![Development Mode](https://github.com/cameronklein/CKRadialMenu/blob/master/CKRadialMenu/MKRadialMenuDevMode.gif)
+
 By activating development mode, you can play with the positioning of popout views inside your own app. Invoke development mode **in viewDidAppear or later.**
 
     [radialMenu enableDevelopmentMode];
