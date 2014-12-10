@@ -16,7 +16,9 @@ Preview
 
 Installation
 -------
-Simply drag *CKRadialMenu.h* and *CKRadialMenu.m* into your project. Cocoa pod support coming soon.
+Simply drag *CKRadialMenu.h* and *CKRadialMenu.m* into your project.
+
+Cocoa pod support coming soon.
 
 Setup
 ------
