@@ -18,6 +18,13 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   NSLog(@"View did load called");
+  UILabel *instructions = [[UILabel alloc] init];
+  instructions.text = @"Drag popup views to adjust angle and distance.";
+  CGFloat height = instructions.intrinsicContentSize.height;
+  CGFloat width = instructions.intrinsicContentSize.width;
+  [self.view addSubview:instructions];
+  instructions.frame = CGRectMake(8, self.view.frame.size.height - 8 - height, width, height);
+  instructions.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11];
   
   //radialView.backgroundColor = [UIColor blueColor];
 }
@@ -29,7 +36,7 @@
 -(void)viewDidAppear:(BOOL)animated {
   NSLog(@"View did appear called");
   [super viewDidAppear:animated];
-  CKRadialMenu *radialView = [[CKRadialMenu alloc] initWithFrame:CGRectMake(self.view.center.x-25, self.view.frame.size.height - 70, 50, 50)];
+  CKRadialMenu *radialView = [[CKRadialMenu alloc] initWithFrame:CGRectMake(self.view.center.x-25, self.view.frame.size.height - 120, 50, 50)];
   radialView.delegate = self;
   radialView.centerView.backgroundColor = [UIColor grayColor];
   [radialView addPopoutView:nil withIndentifier:@"ONE"];
