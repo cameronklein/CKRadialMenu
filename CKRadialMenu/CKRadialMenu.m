@@ -250,7 +250,7 @@
   [staggerSlider addTarget:self action:@selector(staggerSliderChanged:) forControlEvents:UIControlEventValueChanged];
   
   for (UIView *subView in self.popoutViews) {
-    [subView removeGestureRecognizer:[subView gestureRecognizers][0]];
+    //[subView removeGestureRecognizer:[subView gestureRecognizers][0]];
     UIPanGestureRecognizer *panner = [UIPanGestureRecognizer new];
     [panner addTarget:self action:@selector(didPanPopout:)];
     [subView addGestureRecognizer:panner];

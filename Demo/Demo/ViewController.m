@@ -53,7 +53,7 @@
 }
 
 -(void)radialMenu:(CKRadialMenu *)radialMenu didSelectPopoutWithIndentifier:(NSString *)identifier{
-  NSLog(@"DELEGATE CALLED");
+  NSLog(@"Delegate notified of press on popout \"%@\"", identifier);
   
 }
 
