@@ -42,7 +42,10 @@
 @property CGFloat animationDuration;
 @property NSTimeInterval stagger;
 
-@property BOOL menuIsExpanded;
+@property (nonatomic, strong) UIColor *menuBackgroundColor; /* if set will override default one */
+@property (nonatomic, weak) UIGestureRecognizer *gestureRecognizer; /* if set will override default one */
+@property (nonatomic) BOOL hasShadow;
+@property BOOL isMenuExpanded;
 
 @end
 
