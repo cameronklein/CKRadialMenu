@@ -25,33 +25,37 @@
 #pragma mark Initalizer
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithFrame:CGRectZero];
+    self = [super initWithCoder:aDecoder];
+    [self doInitialSetup];
     return self;
 }
 
 -(instancetype)init {
     self = [self initWithFrame:CGRectZero];
+    [self doInitialSetup];
     return self;
 }
 
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {
-        self.popoutViews = [NSMutableArray new];
-        self.poputIDs = [NSMutableDictionary new];
-        self.isMenuExpanded = false;
-        self.centerView = [self makeDefaultCenterView];
-        self.centerView.frame = self.bounds;
-        self.startAngle = -75;
-        self.distanceBetweenPopouts = 50;
-        self.distanceFromCenter = 61;
-        self.stagger = 0.06;
-        self.animationDuration = 0.4;
-        [self addSubview:self.centerView];
-    }
-    
+    [self doInitialSetup];
     return self;
+}
+
+-(void)doInitialSetup {
+    self.popoutViews = [NSMutableArray new];
+    self.poputIDs = [NSMutableDictionary new];
+    self.isMenuExpanded = false;
+    self.startAngle = -75;
+    self.distanceBetweenPopouts = 50;
+    self.distanceFromCenter = 61;
+    self.stagger = 0.06;
+    self.animationDuration = 0.4;
+    
+    self.centerView = [self makeDefaultCenterView];
+    self.centerView.frame = self.bounds;
+    [self addSubview:self.centerView];
 }
 
 #pragma mark Setters
